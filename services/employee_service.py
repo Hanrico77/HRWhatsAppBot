@@ -1,12 +1,12 @@
-from database.sql import Database
-
-db = Database()
+from repository.employee_repository import EmployeeRepository
 
 
 class EmployeeService:
 
-    def get_sql_version(self):
+    def __init__(self):
 
-        rows = db.execute("SELECT @@VERSION")
+        self.repository = EmployeeRepository()
 
-        return rows[0][0]
+    def get_employee(self, emp_no):
+
+        return self.repository.get_employee(emp_no)

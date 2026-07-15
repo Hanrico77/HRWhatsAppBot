@@ -4,34 +4,40 @@ import config
 
 class Database:
 
-    def __init__(self):
+    @staticmethod
+    def get_connection():
 
-        self.connection_string = (
-            f"DRIVER={{ODBC Driver 17 for SQL Server}};"
-            f"SERVER={config.SQL_SERVER};"
-            f"DATABASE={config.SQL_DATABASE};"
-            f"UID={config.SQL_USER};"
-            f"PWD={config.SQL_PASSWORD};"
-            "TrustServerCertificate=yes;"
-        )
+    	return pyodbc.connect(
 
-    def get_connection(self):
+      		f"DRIVER={{{config.SQL_DRIVER}}};"
+  	    	f"SERVER={config.SQL_SERVER};"
+      		f"DATABASE={config.SQL_DATABASE};"
+      		f"UID={config.SQL_USER};"
+      		f"PWD={config.SQL_PASSWORD};"
+      		"TrustServerCertificate=yes;"
+    	)
 
-        return pyodbc.connect(self.connection_string)
+    @staticmethod
+    def execute_query(query, params=None):
 
-    def execute(self, sql, params=None):
-
-        conn = self.get_connection()
+        conn = Database.get_connection()
 
         cursor = conn.cursor()
 
         if params:
-            cursor.execute(sql, params)
+            cursor.execute(query, params)
         else:
-            cursor.execute(sql)
+            cursor.execute(query)
+
+        columns = [column[0] for column in cursor.description]
 
         rows = cursor.fetchall()
 
+        result = []
+
+        for row in rows:
+            result.append(dict(zip(columns, row)))
+
         conn.close()
 
-        return rows
+        return result
