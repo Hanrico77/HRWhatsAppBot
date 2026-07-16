@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from routes.whatsapp import router as whatsapp_router
+from routes.command import router as command_router
 
 import config
 
@@ -21,6 +22,8 @@ app.include_router(health_router)
 app.include_router(employee_router)
 
 app.include_router(whatsapp_router)
+
+app.include_router(command_router)
 
 @app.get("/")
 def root():

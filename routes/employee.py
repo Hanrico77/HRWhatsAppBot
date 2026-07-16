@@ -20,3 +20,8 @@ async def get_employee(emp_no: str):
         )
 
     return employee
+
+@router.get("/employee/search/{search_text}")
+async def search_employee(search_text: str):
+
+    return service.search_employee(search_text)
