@@ -1,21 +1,42 @@
+from formatters.base_formatter import BaseFormatter
+
+
 class LeaveFormatter:
 
     @staticmethod
     def format_leave(rows):
 
         if len(rows) == 0:
-            return "❌ Employee not found or no leave balances."
+            return BaseFormatter.error(
+                "No leave information found."
+            )
 
         emp_no = rows[0]["emp_no"]
-        employee_name = rows[0]["employee_name"]
+        employee = rows[0]["employee_name"]
 
-        message = "🌴 Leave Balances\n\n"
-        message += f"👤 {employee_name}\n"
-        message += f"🆔 Employee #: {emp_no}\n\n"
+        message = BaseFormatter.title(
+            "🌴",
+            "Leave Balances"
+        )
+
+        message += f"👤 {employee}\n\n"
+        message += f"🆔 {emp_no}\n\n"
+
+        icons = {
+            "Annual Leave": "🌴",
+            "Study Leave": "📚",
+            "Family Responsibility Leave": "👨‍👩‍👧"
+        }
 
         for row in rows:
+
+            icon = icons.get(row["leave_type"], "•")
+
             message += (
-                f"• {row['leave_type']}: {row['balance']} days\n"
+                f"{icon} {row['leave_type']}\n"
+                f"{row['balance']} days\n\n"
             )
+
+        message += BaseFormatter.footer()
 
         return message

@@ -29,13 +29,18 @@ class CommandService:
             return BaseFormatter.welcome()
 
         # Find the command handler
+        print("ACTION:", action)
+        print("REGISTERED COMMANDS:", self.registry.commands.keys())
+
         handler = self.registry.get(action)
+
+        print("HANDLER:", handler)
 
         if handler is None:
             return BaseFormatter.error(
                 "Unknown command.\n\n"
                 "Type 'help' to see available commands."
-            )
+        )
 
         # Execute the command
         return handler.execute(arguments)
