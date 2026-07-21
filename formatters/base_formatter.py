@@ -68,3 +68,17 @@ class BaseFormatter:
             + message
             + BaseFormatter.footer()
         )
+    @staticmethod
+    
+    def quick_actions(actions):
+
+        message = (
+            "\n"
+            "💡 NEXT COMMANDS\n"
+            "────────────────────────\n"
+        )
+
+        for action in actions:
+            message += f"{action}\n"
+
+        return message + "\n"

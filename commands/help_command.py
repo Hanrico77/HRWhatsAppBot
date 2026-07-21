@@ -23,6 +23,15 @@ class HelpCommand(BaseCommand):
             "🌴 leave 29424\n"
             "View leave balances\n\n"
 
+            "👔 manager 0029424\n"
+            "View direct manager\n\n"
+
+            "👤 profile 0029424\n"
+            "Complete employee profile\n\n"
+
+            "👥 reports 0029424\n"
+            "View direct reports\n\n"
+
             "❓ help\n"
             "Show this help screen\n"
         )

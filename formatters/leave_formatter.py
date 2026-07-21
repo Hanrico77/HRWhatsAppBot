@@ -36,7 +36,11 @@ class LeaveFormatter:
                 f"{icon} {row['leave_type']}\n"
                 f"{row['balance']} days\n\n"
             )
-
+        message += BaseFormatter.quick_actions([
+            f"👤 profile {emp_no}",
+            f"👔 manager {emp_no}",
+            f"🔍 search"
+        ])
         message += BaseFormatter.footer()
 
         return message
