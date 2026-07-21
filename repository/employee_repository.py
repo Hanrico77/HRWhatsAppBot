@@ -8,12 +8,12 @@ class EmployeeRepository:
         sql = """
 
         SELECT
-            [emp no]      AS emp_no,
-            Name          AS name,
-            Surname       AS surname,
-            Job_Title     AS job_title,
-            Department    AS department,
-            Email         AS email
+            RTRIM([emp no])      AS emp_no,
+            RTRIM(Name)          AS name,
+            RTRIM(Surname)       AS surname,
+            RTRIM(Job_Title)     AS job_title,
+            RTRIM(Department)    AS department,
+            RTRIM(Email)         AS email
 
         FROM vw_auditHR
 

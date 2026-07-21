@@ -1,6 +1,6 @@
 from commands.employee_command import EmployeeCommand
 from commands.search_command import SearchCommand
-
+from commands.leave_command import LeaveCommand
 
 class CommandRegistry:
 
@@ -8,7 +8,8 @@ class CommandRegistry:
 
         self.commands = {
             "employee": EmployeeCommand(),
-            "search": SearchCommand()
+            "search": SearchCommand(),
+            "leave": LeaveCommand()
         }
 
     def get(self, name):

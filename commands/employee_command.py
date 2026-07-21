@@ -1,5 +1,6 @@
 from commands.base_command import BaseCommand
 from services.employee_service import EmployeeService
+from formatters.employee_formatter import EmployeeFormatter
 
 
 class EmployeeCommand(BaseCommand):
@@ -10,6 +11,8 @@ class EmployeeCommand(BaseCommand):
     def execute(self, arguments):
 
         if len(arguments) == 0:
-            return {"error": "Employee number missing"}
+            return "❌ Employee number missing."
 
-        return self.employee_service.get_employee(arguments[0])
+        employee = self.employee_service.get_employee(arguments[0])
+
+        return EmployeeFormatter.format_employee(employee)
